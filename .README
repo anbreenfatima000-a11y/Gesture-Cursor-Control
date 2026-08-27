@@ -1,0 +1,84 @@
+# Real-Time Hand-Gesture Cursor Control System
+
+A touchless human-computer interaction prototype that lets you control your computer's cursor using only hand gestures, tracked in real time through a standard webcam — no mouse or keyboard required.
+
+This project is a practical, hands-on extension of independent research on vision-based gesture systems for motor-impaired users, and serves as a proof-of-concept for the "Cursor Mode" described in the author's final year project, *Hands-Free Computing: A Context-Aware Gesture and Voice Control System*.
+
+## Features
+
+| Gesture | Action |
+|---|---|
+| Pointing (index finger) | Move cursor |
+| Fist (quick) | Left click |
+| Fist (quick, twice) | Double click |
+| Fist (held ~0.6s+) | Click-and-drag |
+| Two fingers up (index + middle) | Scroll |
+
+## Tech Stack
+
+- **Python 3.12**
+- **OpenCV** — video capture and frame processing
+- **MediaPipe (Hands)** — real-time hand landmark detection
+- **PyAutoGUI** — cursor and mouse action automation
+- **NumPy** — coordinate mapping and smoothing
+
+## How It Works
+
+1. A webcam feed is captured and processed frame-by-frame using OpenCV.
+2. MediaPipe detects 21 hand landmarks per frame in real time.
+3. The palm center (landmark 9) is used as the stable reference point for cursor movement, so that finger gestures (like making a fist) don't disturb cursor position.
+4. Webcam-space coordinates are mapped to full screen coordinates using an active-zone mapping technique, so a small, comfortable hand movement range covers the entire screen.
+5. A smoothing algorithm reduces jitter for stable cursor movement.
+6. Rule-based gesture classification (based on relative finger-joint positions) distinguishes between click, double-click, drag, and scroll gestures, with debouncing logic to avoid accidental gesture conflicts.
+
+## Testing Results
+
+Each gesture was tested over multiple trials in a normal indoor lighting environment:
+
+| Gesture | Attempts | Successful | Accuracy |
+|---|---|---|---|
+| Cursor movement (pointing) | — | — | Smooth, real-time tracking with minimal jitter across the full screen range |
+| Single Click (fist) | 20 | 18 | 90% |
+| Double Click | 20 | 18 | 90% |
+| Drag (held fist) | 15 | 15 | 100% |
+| Scroll (two fingers) | 20 | 20 | 100% |
+
+## Setup & Usage
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd gesture-cursor-control
+
+# Create and activate a virtual environment (Python 3.11 or 3.12 recommended)
+py -3.12 -m venv gesture_env
+gesture_env\Scripts\activate      # Windows
+source gesture_env/bin/activate   # macOS/Linux
+
+# Install dependencies
+pip install opencv-python mediapipe==0.10.14 pyautogui numpy
+
+# Run
+python gesture_cursor.py
+```
+
+Press `q` to quit the application at any time.
+
+**Note:** This project uses `mediapipe==0.10.14` specifically, as more recent MediaPipe releases have removed the legacy `solutions` API used here in favor of the newer Tasks API.
+
+## Limitations & Future Work
+
+- Currently supports a single hand and a fixed "Cursor Mode" only.
+- Gesture recognition accuracy could be further improved with adaptive lighting handling.
+- Planned extensions (per the associated final year project) include voice command integration and context-aware mode switching (Presentation / Media / Cursor).
+
+## Background
+
+This project extends independent research conducted by the author:
+*A Review of Vision-Based Gesture Systems for Motor-Impaired Users (2020–2025)* — a systematic review of 24 studies on vision-based deep learning approaches for gesture-controlled assistive systems, conducted following PRISMA 2020 guidelines.
+
+## Author
+
+**Anbreen Fatima**
+BS Information Technology, Emerson University Multan
+[LinkedIn](https://www.linkedin.com/in/anbreen-fatima)
