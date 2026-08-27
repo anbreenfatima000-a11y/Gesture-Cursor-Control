@@ -47,7 +47,7 @@ Each gesture was tested over multiple trials in a normal indoor lighting environ
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone <https://github.com/anbreenfatima000-a11y/Gesture-Cursor-Control.git>
 cd gesture-cursor-control
 
 # Create and activate a virtual environment (Python 3.11 or 3.12 recommended)
