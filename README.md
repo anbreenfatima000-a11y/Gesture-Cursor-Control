@@ -14,6 +14,12 @@ This project is a practical, hands-on extension of independent research on visio
 | Fist (held ~0.6s+) | Click-and-drag |
 | Two fingers up (index + middle) | Scroll |
 
+## Demo
+ 
+| Pointer Movement | Fist — Click | Scroll Mode |
+|---|---|---|
+| ![Pointer Movement](demo/pointer-movement.png) | ![Fist-Click](demo/fist-click.png) | ![Scroll Mode](demo/scroll-mode.png) |
+
 ## Tech Stack
 
 - **Python 3.12**
